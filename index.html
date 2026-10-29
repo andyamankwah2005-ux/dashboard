@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission 3 - Modern Interactive Trading Dashboard</title>
+  <meta name="description" content="Mission 3 - Next-generation digitalized SaaS trading dashboard with overview summary, equity curve, win/loss performance, and recent trades.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Main Showcase Container -->
+  <div class="app-container" id="appRoot">
+    
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-top">
+        <div class="sidebar-brand-row">
+          <a class="brand-wrapper" id="brandLogo">
+            <div class="brand-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                <path d="M2 17l10 5 10-5"></path>
+                <path d="M2 12l10 5 10-5"></path>
+              </svg>
+            </div>
+            <div class="brand-name">
+              Mission 3
+              <span class="brand-badge">PRO</span>
+            </div>
+          </a>
+          <button class="mobile-close-btn" id="mobileCloseBtn" aria-label="Close menu">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <div class="nav-section">
+          <div class="nav-label">Navigation</div>
+          
+          <a class="nav-item active" data-tab="dashboard" id="navDashboard">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="7" height="9"></rect>
+              <rect x="14" y="3" width="7" height="5"></rect>
+              <rect x="14" y="12" width="7" height="9"></rect>
+              <rect x="3" y="16" width="7" height="5"></rect>
+            </svg>
+            <span>Dashboard</span>
+          </a>
+
+          <a class="nav-item" data-tab="trades" id="navTrades">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
+              <polyline points="16 7 22 7 22 13"></polyline>
+            </svg>
+            <span>Trades</span>
+          </a>
+
+          <a class="nav-item" data-tab="analytics" id="navAnalytics">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="20" x2="18" y2="10"></line>
+              <line x1="12" y1="20" x2="12" y2="4"></line>
+              <line x1="6" y1="20" x2="6" y2="14"></line>
+            </svg>
+            <span>Analytics</span>
+          </a>
+
+          <a class="nav-item" data-tab="calendar" id="navCalendar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <span>Calendar</span>
+          </a>
+
+          <a class="nav-item" data-tab="settings" id="navSettings">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+            </svg>
+            <span>Settings</span>
+          </a>
+
+          <a href="admin.html" class="nav-item" id="navAdmin" style="color: #60a5fa; margin-top: 6px; background: rgba(59, 130, 246, 0.08);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="3" y1="9" x2="21" y2="9"></line>
+              <line x1="9" y1="21" x2="9" y2="9"></line>
+            </svg>
+            <span>Admin Studio</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="theme-toggle-wrap">
+          <span class="theme-toggle-label">Theme Mode</span>
+          <button class="theme-toggle-pill" id="themeToggleBtn" aria-label="Toggle dark/light theme" title="Toggle Dark/Light Mode">
+            <span class="theme-icon light-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+              </svg>
+            </span>
+            <span class="theme-icon dark-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+              </svg>
+            </span>
+            <span class="theme-toggle-thumb"></span>
+          </button>
+        </div>
+
+        <div class="user-profile-card" id="userProfileBtn">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=160&q=80" alt="User Avatar" class="user-avatar">
+          <div class="user-info">
+            <span class="user-name">Alex Williamson</span>
+            <span class="user-handle">#trader-1974</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+    <!-- MAIN DASHBOARD CANVAS -->
+    <main class="main-canvas">
+      
+      <!-- Canvas Header -->
+      <header class="canvas-header">
+        <div class="header-left-wrap">
+          <button class="mobile-menu-trigger" id="mobileMenuTrigger" aria-label="Open navigation">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+
+          <div class="header-title-wrap">
+            <h1 class="canvas-title" id="pageMainTitle">Main Dashboard (Overview)</h1>
+            <div class="live-pulse-badge">
+              <span class="live-dot"></span>
+              <span id="pageLiveSubtitle">Live Portfolio Feed</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="header-actions">
+          <button class="header-theme-btn" id="headerThemeBtn" aria-label="Toggle Theme" title="Toggle Dark/Light Mode">
+            <svg class="sun-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <svg class="moon-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+            <span class="theme-text-status">Dark Mode</span>
+          </button>
+
+          <button class="btn-trade-action" id="openAddTradeModalBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            <span>+ Add Trade</span>
+          </button>
+          
+          <a href="admin.html" class="btn-primary-dark" style="text-decoration: none;">
+            <span>Customize Studio</span>
+          </a>
+        </div>
+      </header>
+
+      <!-- VIEW 1: DASHBOARD OVERVIEW -->
+      <div class="view-panel active" id="viewDashboard">
+        
+        <!-- 1. SUMMARY CARDS (4 KPI CARDS: Total Trades, Win Rate, Current Drawdown, Profit/Loss) -->
+        <section class="overview-summary-row" id="metricsRow">
+          
+          <!-- Summary Card 1: Total Trades -->
+          <div class="metric-card" id="cardTotalTrades">
+            <div class="metric-content">
+              <div class="metric-label">Total Trades</div>
+              <div class="metric-value" id="valTotalTrades">
+                1,284 <span class="metric-unit">trades</span>
+              </div>
+              <div class="metric-delta positive">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="18 15 12 9 6 15"></polyline>
+                </svg>
+                <span>+18 executed this week</span>
+              </div>
+            </div>
+            <div class="sparkline-bars">
+              <div class="spark-bar" style="height: 18px;"></div>
+              <div class="spark-bar" style="height: 32px;"></div>
+              <div class="spark-bar" style="height: 24px;"></div>
+              <div class="spark-bar" style="height: 44px;"></div>
+              <div class="spark-bar" style="height: 38px;"></div>
+            </div>
+          </div>
+
+          <!-- Summary Card 2: Win Rate (%) -->
+          <div class="metric-card" id="cardWinRate">
+            <div class="metric-content">
+              <div class="metric-label">Win Rate (%)</div>
+              <div class="metric-value" id="valWinRate">
+                76.4<span class="metric-unit">%</span>
+              </div>
+              <div class="metric-delta positive">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="18 15 12 9 6 15"></polyline>
+                </svg>
+                <span>980 Wins / 304 Losses</span>
+              </div>
+            </div>
+            <div class="sparkline-bars">
+              <div class="spark-bar alt-green" style="height: 20px;"></div>
+              <div class="spark-bar alt-green" style="height: 36px;"></div>
+              <div class="spark-bar alt-green" style="height: 30px;"></div>
+              <div class="spark-bar alt-green" style="height: 46px;"></div>
+              <div class="spark-bar alt-green" style="height: 42px;"></div>
+            </div>
+          </div>
+
+          <!-- Summary Card 3: Current Drawdown (%) -->
+          <div class="metric-card" id="cardDrawdown">
+            <div class="metric-content">
+              <div class="metric-label">Current Drawdown (%)</div>
+              <div class="metric-value" id="valDrawdown">
+                3.2<span class="metric-unit">%</span>
+              </div>
+              <div class="metric-delta" style="color: #059669;">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>Max DD: 6.8% (Safe)</span>
+              </div>
+            </div>
+            <div class="sparkline-bars">
+              <div class="spark-bar alt-orange" style="height: 26px;"></div>
+              <div class="spark-bar alt-orange" style="height: 20px;"></div>
+              <div class="spark-bar alt-orange" style="height: 14px;"></div>
+              <div class="spark-bar alt-orange" style="height: 18px;"></div>
+              <div class="spark-bar alt-orange" style="height: 12px;"></div>
+            </div>
+          </div>
+
+          <!-- Summary Card 4: Profit/Loss -->
+          <div class="metric-card" id="cardProfitLoss">
+            <div class="metric-content">
+              <div class="metric-label">Total Realized Profit / Loss</div>
+              <div class="metric-value" id="valProfitLoss" style="color: #059669;">
+                +$142,850.00
+              </div>
+              <div class="metric-delta positive">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="18 15 12 9 6 15"></polyline>
+                </svg>
+                <span>+24.6% All-time ROI</span>
+              </div>
+            </div>
+            <div class="sparkline-bars">
+              <div class="spark-bar alt-green" style="height: 22px;"></div>
+              <div class="spark-bar alt-green" style="height: 34px;"></div>
+              <div class="spark-bar alt-green" style="height: 28px;"></div>
+              <div class="spark-bar alt-green" style="height: 48px;"></div>
+              <div class="spark-bar alt-green" style="height: 44px;"></div>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- 2. INTERACTIVE CHARTS: Equity Curve & Win/Loss Performance Over Time -->
+        <section class="overview-charts-grid">
+          
+          <!-- CHART 1: Equity Curve -->
+          <div class="card chart-card-container" id="widget-equity-curve">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title">Equity Curve</h2>
+                <div class="card-subtitle">Cumulative portfolio account growth vs. market benchmark</div>
+              </div>
+
+              <div class="timeframe-pills" id="equityTimeframePills">
+                <button class="tf-btn" data-range="7D">7D</button>
+                <button class="tf-btn active" data-range="30D">30D</button>
+                <button class="tf-btn" data-range="90D">90D</button>
+                <button class="tf-btn" data-range="1Y">1Y</button>
+                <button class="tf-btn" data-range="ALL">ALL</button>
+              </div>
+            </div>
+
+            <div class="equity-legend-row">
+              <div class="legend-item">
+                <span class="legend-line" style="background-color: #10b981;"></span>
+                <span>Account Equity ($142.8k)</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-line dashed" style="background-color: #94a7a3;"></span>
+                <span>Benchmark ($109.4k)</span>
+              </div>
+            </div>
+
+            <div class="chart-canvas-container" style="height: 260px;">
+              <canvas id="equityCurveCanvas"></canvas>
+            </div>
+          </div>
+
+          <!-- CHART 2: Win/Loss Performance Over Time -->
+          <div class="card chart-card-container" id="widget-winloss-perf">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title">Win / Loss Performance Over Time</h2>
+                <div class="card-subtitle">Monthly trade outcome distribution & win ratio</div>
+              </div>
+
+              <div class="perf-stats-tag">
+                <span>Profit Factor: <strong>2.42</strong></span>
+              </div>
+            </div>
+
+            <div class="equity-legend-row">
+              <div class="legend-item">
+                <span class="legend-dot" style="background-color: #10b981;"></span>
+                <span>Winning Trades</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-dot" style="background-color: #f43f5e;"></span>
+                <span>Losing Trades</span>
+              </div>
+              <div class="legend-item" style="margin-left: auto;">
+                <span style="color: var(--text-muted); font-size: 11px;">Win Streak: <strong style="color: #10b981;">8</strong></span>
+              </div>
+            </div>
+
+            <div class="chart-canvas-container" style="height: 260px;">
+              <canvas id="winLossCanvas"></canvas>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- 3. RECENT TRADES PREVIEW & LIVE ORDER DESK -->
+        <section class="card" id="widget-recent-trades">
+          <div class="card-header" style="flex-wrap: wrap; gap: 12px;">
+            <div>
+              <h2 class="card-title">Recent Trades Preview</h2>
+              <div class="card-subtitle">Detailed execution history, profit/loss, and trade analytics</div>
+            </div>
+
+            <div class="trades-filter-group" id="tradeFilters">
+              <button class="filter-pill active" data-filter="ALL">All (1,284)</button>
+              <button class="filter-pill" data-filter="WON">Wins Only (980)</button>
+              <button class="filter-pill" data-filter="LOST">Losses Only (304)</button>
+              <button class="filter-pill" data-filter="CRYPTO">Crypto</button>
+              <button class="filter-pill" data-filter="STOCKS">Equities</button>
+            </div>
+          </div>
+
+          <div class="positions-table-wrap">
+            <table class="data-table" id="recentTradesTable">
+              <thead>
+                <tr>
+                  <th>Trade ID</th>
+                  <th>Asset</th>
+                  <th>Side</th>
+                  <th>Entry Price</th>
+                  <th>Exit Price</th>
+                  <th>Position Size</th>
+                  <th>Profit / Loss</th>
+                  <th>Duration</th>
+                  <th>Timestamp</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="recentTradesTableBody">
+                <!-- Injected dynamically via JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- VIEW 2: TRADES JOURNAL (Dedicated Trades Navigation View) -->
+      <div class="view-panel" id="viewTrades">
+        <div class="trades-journal-header">
+          <div class="journal-stats-trio">
+            <div class="journal-stat-card">
+              <span class="j-stat-label">Logged Trades</span>
+              <strong class="j-stat-val" id="journalTotalLogged">1,284</strong>
+            </div>
+            <div class="journal-stat-card">
+              <span class="j-stat-label">Journal Win Rate</span>
+              <strong class="j-stat-val" style="color: #059669;" id="journalWinRate">76.4%</strong>
+            </div>
+            <div class="journal-stat-card">
+              <span class="j-stat-label">Avg R:R Ratio</span>
+              <strong class="j-stat-val">1 : 2.85</strong>
+            </div>
+          </div>
+
+          <button class="btn-trade-action" id="openAddTradeBtnJournal">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            <span>+ Add Trade</span>
+          </button>
+        </div>
+
+        <div class="card" style="margin-top: 20px;">
+          <div class="card-header" style="flex-wrap: wrap; gap: 12px;">
+            <div>
+              <h2 class="card-title">Trade Log & Performance Journal</h2>
+              <div class="card-subtitle">Complete records with screenshots, tags, stop loss / take profit, and thesis notes</div>
+            </div>
+
+            <div class="trades-filter-group" id="journalFilterTags">
+              <button class="filter-pill active" data-tag="ALL">All Tags</button>
+              <button class="filter-pill" data-tag="Scalping">Scalping</button>
+              <button class="filter-pill" data-tag="Swing">Swing</button>
+              <button class="filter-pill" data-tag="News Trade">News Trade</button>
+              <button class="filter-pill" data-tag="Breakout">Breakout</button>
+            </div>
+          </div>
+
+          <div class="trades-journal-grid" id="journalTradesContainer">
+            <!-- Populated via JavaScript with screenshots, tags, comments, SL/TP -->
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW 3: ANALYTICS (Placeholder with quick return) -->
+      <div class="view-panel" id="viewAnalytics">
+        <div class="card" style="padding: 40px; text-align: center;">
+          <h2 style="font-size: 20px; font-weight: 800; margin-bottom: 8px;">Analytics & Risk Engine</h2>
+          <p style="color: var(--text-muted); font-size: 13px; max-width: 500px; margin: 0 auto 20px;">Detailed Sharpe ratio analysis, Maximum Adverse Excursion (MAE), and risk distributions.</p>
+          <button class="btn-secondary" onclick="document.getElementById('navDashboard').click()">Return to Overview</button>
+        </div>
+      </div>
+
+      <!-- VIEW 4: CALENDAR -->
+      <div class="view-panel" id="viewCalendar">
+        <div class="card" style="padding: 40px; text-align: center;">
+          <h2 style="font-size: 20px; font-weight: 800; margin-bottom: 8px;">Trading & Economic Calendar</h2>
+          <p style="color: var(--text-muted); font-size: 13px; max-width: 500px; margin: 0 auto 20px;">Upcoming CPI releases, FOMC meetings, and trade journal profit calendar.</p>
+          <button class="btn-secondary" onclick="document.getElementById('navDashboard').click()">Return to Overview</button>
+        </div>
+      </div>
+
+      <!-- VIEW 5: SETTINGS -->
+      <div class="view-panel" id="viewSettings">
+        <div class="card" style="padding: 40px; text-align: center;">
+          <h2 style="font-size: 20px; font-weight: 800; margin-bottom: 8px;">Account Settings</h2>
+          <p style="color: var(--text-muted); font-size: 13px; max-width: 500px; margin: 0 auto 20px;">Manage leverage multipliers, risk limits, API keys, and notification channels.</p>
+          <a href="admin.html" class="btn-primary-save" style="display: inline-flex; text-decoration: none;">Open Admin Studio</a>
+        </div>
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- ADD TRADE MODULE MODAL -->
+  <div class="modal-overlay" id="addTradeModal">
+    <div class="modal-card modal-card-large">
+      <div class="modal-header">
+        <div>
+          <h3 class="modal-title">+ Add Trade to Journal</h3>
+          <p style="font-size: 11.5px; color: var(--text-muted); margin-top: 2px;">Log a complete trade with screenshot, metrics, stop loss, take profit, and thesis notes.</p>
+        </div>
+        <button class="modal-close-btn" id="closeAddTradeModalBtn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <form id="addTradeForm">
+        <!-- 1. DRAG & DROP SCREENSHOT UPLOAD -->
+        <div class="form-group">
+          <label class="form-label">Trade Screenshot / Chart Image</label>
+          <div class="drag-drop-zone" id="screenshotDropZone">
+            <input type="file" id="tradeScreenshotInput" accept="image/*" style="display: none;">
+            <div class="dropzone-content" id="dropzonePrompt">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color: var(--brand-emerald);">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                <polyline points="21 15 16 10 5 21"></polyline>
+              </svg>
+              <div style="font-size: 13px; font-weight: 600; color: var(--text-main); margin-top: 6px;">
+                Drag & drop trade screenshot here, or <span style="color: var(--brand-emerald); cursor: pointer;">browse</span>
+              </div>
+              <span style="font-size: 11px; color: var(--text-muted);">Supports PNG, JPG, WebP up to 10MB</span>
+            </div>
+
+            <!-- Preview Image when uploaded -->
+            <div class="dropzone-preview" id="dropzonePreview" style="display: none;">
+              <img src="" alt="Trade Preview" id="previewImgEl" class="preview-uploaded-img">
+              <button type="button" class="btn-remove-img" id="removeImgBtn" title="Remove image">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="trade-modal-divider">
+          <span>OR MANUALLY INPUT DETAILS</span>
+        </div>
+
+        <!-- 2. MANUAL INPUT FIELDS -->
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label">Trading Pair</label>
+            <div class="form-input-wrap">
+              <input type="text" class="form-input" id="inpTradePair" placeholder="e.g., EUR/USD, BTC/USDT" value="BTC/USDT" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Side / Direction</label>
+            <div class="form-input-wrap">
+              <select class="form-input" id="inpTradeSide">
+                <option value="BUY / LONG">BUY / LONG</option>
+                <option value="SELL / SHORT">SELL / SHORT</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label">Entry Price ($)</label>
+            <div class="form-input-wrap">
+              <input type="number" step="any" class="form-input" id="inpEntryPrice" placeholder="0.00" value="64200.00" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Exit Price ($)</label>
+            <div class="form-input-wrap">
+              <input type="number" step="any" class="form-input" id="inpExitPrice" placeholder="0.00" value="65100.00" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label">Stop Loss ($)</label>
+            <div class="form-input-wrap">
+              <input type="number" step="any" class="form-input" id="inpStopLoss" placeholder="Optional SL" value="63800.00">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Take Profit ($)</label>
+            <div class="form-input-wrap">
+              <input type="number" step="any" class="form-input" id="inpTakeProfit" placeholder="Optional TP" value="65400.00">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label">Trade Outcome</label>
+            <div class="form-input-wrap">
+              <select class="form-input" id="inpTradeOutcome">
+                <option value="WIN">Win (Profit)</option>
+                <option value="LOSS">Loss</option>
+                <option value="BREAK-EVEN">Break-even</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Position Size & Realized P&L ($)</label>
+            <div class="form-input-wrap">
+              <input type="number" step="any" class="form-input" id="inpRealizedPnl" placeholder="P&L ($)" value="900.00" required>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. TAG TRADES -->
+        <div class="form-group">
+          <label class="form-label">Tag Trade</label>
+          <div class="tags-selectable-group" id="tagsSelectableGroup">
+            <button type="button" class="tag-select-btn active" data-tag="Scalping">Scalping</button>
+            <button type="button" class="tag-select-btn" data-tag="Swing">Swing</button>
+            <button type="button" class="tag-select-btn" data-tag="News Trade">News Trade</button>
+            <button type="button" class="tag-select-btn" data-tag="Breakout">Breakout</button>
+            <button type="button" class="tag-select-btn" data-tag="Reversal">Reversal</button>
+            <button type="button" class="tag-select-btn" data-tag="Day Trade">Day Trade</button>
+          </div>
+        </div>
+
+        <!-- 4. COMMENTS / NOTES -->
+        <div class="form-group">
+          <label class="form-label">Trade Notes & Reflection (Optional)</label>
+          <textarea class="form-textarea" id="inpTradeNotes" rows="3" placeholder="Enter trade thesis, catalyst, execution discipline, emotions, key lessons..."></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit-order" id="btnSaveTrade">Save Trade to Journal</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- FULLSCREEN IMAGE VIEWER MODAL -->
+  <div class="modal-overlay" id="imageViewerModal">
+    <div class="image-viewer-card">
+      <div class="image-viewer-header">
+        <span id="imageViewerTitle" style="font-weight: 700; color: #ffffff;">Trade Chart Screenshot</span>
+        <button class="modal-close-btn" id="closeImageViewerBtn" style="color: #ffffff;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <img src="" id="imageViewerSrc" alt="Fullscreen Screenshot" class="image-viewer-img">
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- APP SCRIPTS -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
