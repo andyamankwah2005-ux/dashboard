@@ -1,14 +1,15 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useApp } from '../../context/AppContext';
 
-export default function AddTradeModal({ isOpen, onClose, initialDateISO }) {
-  const { adminConfig, addTrade, addToast } = useApp();
+export default function AddTradeModal({ isOpen, onClose, initialDateISO, editingTrade }) {
+  const { adminConfig, addTrade, updateTrade, addToast } = useApp();
   const tags = adminConfig.tags || ['Scalping', 'Swing', 'News Trade', 'Breakout', 'Reversal', 'Day Trade'];
   const pairsList = (adminConfig.tradingPairs || '')
     .split(',')
     .map((s) => s.trim())
     .filter(Boolean);
 
+  const isEditing = Boolean(editingTrade);
   const fileInputRef = useRef(null);
   const [isDragOver, setIsDragOver] = useState(false);
   const [screenshot, setScreenshot] = useState(null);
@@ -22,6 +23,44 @@ export default function AddTradeModal({ isOpen, onClose, initialDateISO }) {
   const [realizedPnl, setRealizedPnl] = useState('900.00');
   const [selectedTag, setSelectedTag] = useState(tags[0] || 'Scalping');
   const [notes, setNotes] = useState('');
+
+  useEffect(() => {
+    if (!isOpen) return;
+    if (editingTrade) {
+      setScreenshot(editingTrade.screenshot || null);
+      setPair(editingTrade.symbol || 'BTC/USDT');
+      setSide(editingTrade.side || 'BUY / LONG');
+      setEntryPrice(editingTrade.entry !== undefined ? String(editingTrade.entry) : '0');
+      setExitPrice(editingTrade.exit !== undefined ? String(editingTrade.exit) : '0');
+      setStopLoss(editingTrade.stopLoss != null ? String(editingTrade.stopLoss) : '');
+      setTakeProfit(editingTrade.takeProfit != null ? String(editingTrade.takeProfit) : '');
+      setOutcome(
+        editingTrade.status === 'WON'
+          ? 'WIN'
+          : editingTrade.status === 'BREAK-EVEN'
+          ? 'BREAK-EVEN'
+          : 'LOSS'
+      );
+      setRealizedPnl(
+        editingTrade.pnl !== undefined ? String(Math.abs(parseFloat(editingTrade.pnl) || 0)) : '0'
+      );
+      setSelectedTag(editingTrade.tag || tags[0] || 'Scalping');
+      setNotes(editingTrade.notes || '');
+    } else {
+      setScreenshot(null);
+      setPair('BTC/USDT');
+      setSide('BUY / LONG');
+      setEntryPrice('64200.00');
+      setExitPrice('65100.00');
+      setStopLoss('63800.00');
+      setTakeProfit('65400.00');
+      setOutcome('WIN');
+      setRealizedPnl('900.00');
+      setSelectedTag(tags[0] || 'Scalping');
+      setNotes('');
+    }
+    if (fileInputRef.current) fileInputRef.current.value = '';
+  }, [isOpen, editingTrade]);
 
   if (!isOpen) return null;
 
@@ -54,29 +93,50 @@ export default function AddTradeModal({ isOpen, onClose, initialDateISO }) {
     const todayISO = new Date().toISOString().slice(0, 10);
     const chosenDate = initialDateISO || todayISO;
 
-    const newTrade = {
-      id: `TRD-${Math.floor(Math.random() * 900 + 9100)}`,
-      symbol: pair.trim(),
-      side,
-      type: side.includes('LONG') ? 'LONG' : 'SHORT',
-      entry,
-      exit,
-      stopLoss: sl,
-      takeProfit: tp,
-      size: 'Standard Lot',
-      pnl: calculatedPnl,
-      pnlPercent: isWon ? Math.abs(pnlPercent) : -Math.abs(pnlPercent),
-      duration: '45m',
-      status: isWon ? 'WON' : isBE ? 'BREAK-EVEN' : 'LOST',
-      tag: selectedTag || 'Scalping',
-      notes: notes.trim() || 'Executed according to trading plan.',
-      screenshot:
-        screenshot || '/images/trade-chart-1.jpg',
-      time: initialDateISO && initialDateISO !== todayISO ? initialDateISO : 'Just now',
-      dateISO: chosenDate
-    };
+    if (isEditing) {
+      const updatedTrade = {
+        ...editingTrade,
+        symbol: pair.trim(),
+        side,
+        type: side.includes('LONG') ? 'LONG' : 'SHORT',
+        entry,
+        exit,
+        stopLoss: sl,
+        takeProfit: tp,
+        pnl: calculatedPnl,
+        pnlPercent: isWon ? Math.abs(pnlPercent) : isBE ? 0 : -Math.abs(pnlPercent),
+        status: isWon ? 'WON' : isBE ? 'BREAK-EVEN' : 'LOST',
+        tag: selectedTag || 'Scalping',
+        notes: notes.trim() || 'Executed according to trading plan.',
+        screenshot: screenshot || editingTrade.screenshot || '/images/trade-chart-1.jpg'
+      };
+      updateTrade(updatedTrade);
+    } else {
+      const newTrade = {
+        id: `TRD-${Math.floor(Math.random() * 900 + 9100)}`,
+        symbol: pair.trim(),
+        side,
+        type: side.includes('LONG') ? 'LONG' : 'SHORT',
+        entry,
+        exit,
+        stopLoss: sl,
+        takeProfit: tp,
+        size: 'Standard Lot',
+        pnl: calculatedPnl,
+        pnlPercent: isWon ? Math.abs(pnlPercent) : -Math.abs(pnlPercent),
+        duration: '45m',
+        status: isWon ? 'WON' : isBE ? 'BREAK-EVEN' : 'LOST',
+        tag: selectedTag || 'Scalping',
+        notes: notes.trim() || 'Executed according to trading plan.',
+        screenshot:
+          screenshot || '/images/trade-chart-1.jpg',
+        time: initialDateISO && initialDateISO !== todayISO ? initialDateISO : 'Just now',
+        dateISO: chosenDate
+      };
 
-    addTrade(newTrade);
+      addTrade(newTrade);
+    }
+
     setScreenshot(null);
     setNotes('');
     if (fileInputRef.current) fileInputRef.current.value = '';
@@ -91,9 +151,13 @@ export default function AddTradeModal({ isOpen, onClose, initialDateISO }) {
       >
         <div className="modal-header">
           <div>
-            <h3 className="modal-title">+ Add Trade to Journal</h3>
+            <h3 className="modal-title">
+              {isEditing ? `Update Trade (${editingTrade.id})` : '+ Add Trade to Journal'}
+            </h3>
             <p style={{ fontSize: '11.5px', color: 'var(--text-muted)', marginTop: '2px' }}>
-              Log a complete trade with screenshot, metrics, stop loss, take profit, and thesis notes.
+              {isEditing
+                ? 'Edit trade details, screenshot, stop loss / take profit, tags, and thesis notes.'
+                : 'Log a complete trade with screenshot, metrics, stop loss, take profit, and thesis notes.'}
             </p>
           </div>
           <button
@@ -406,7 +470,7 @@ export default function AddTradeModal({ isOpen, onClose, initialDateISO }) {
           </div>
 
           <button type="submit" className="btn-submit-order" id="btnSaveTrade">
-            Save Trade to Journal
+            {isEditing ? 'Update Trade' : 'Save Trade to Journal'}
           </button>
         </form>
       </div>

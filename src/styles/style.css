@@ -2048,6 +2048,56 @@ input:checked + .toggle-slider:before {
   font-style: italic;
 }
 
+.trade-card-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.btn-trade-card {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 7px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid var(--card-border);
+  transition: var(--transition-smooth);
+}
+
+.btn-trade-update {
+  background-color: var(--color-blue-bg);
+  color: var(--brand-emerald-dark);
+  border-color: transparent;
+}
+
+.btn-trade-update:hover {
+  background-color: var(--brand-emerald);
+  color: #ffffff;
+}
+
+[data-theme="dark"] .btn-trade-update {
+  color: #93c5fd;
+}
+
+[data-theme="dark"] .btn-trade-update:hover {
+  color: #ffffff;
+}
+
+.btn-trade-delete {
+  background-color: var(--color-red-bg);
+  color: var(--color-red);
+  border-color: transparent;
+}
+
+.btn-trade-delete:hover {
+  background-color: var(--color-red);
+  color: #ffffff;
+}
+
 /* Fullscreen Image Viewer Modal */
 .image-viewer-card {
   max-width: 90vw;

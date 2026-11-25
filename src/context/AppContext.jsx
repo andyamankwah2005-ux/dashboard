@@ -203,6 +203,50 @@ export function AppProvider({ children }) {
     [addToast]
   );
 
+  const updateTrade = useCallback(
+    (updatedTrade) => {
+      const existing = trades.find((t) => t.id === updatedTrade.id);
+      const pnlDiff = existing
+        ? (parseFloat(updatedTrade.pnl) || 0) - (parseFloat(existing.pnl) || 0)
+        : 0;
+
+      setTrades((prev) => {
+        const updated = prev.map((t) => (t.id === updatedTrade.id ? updatedTrade : t));
+        localStorage.setItem('mission3_trades_data', JSON.stringify(updated));
+        return updated;
+      });
+      setAccount((prev) => ({
+        ...prev,
+        totalPnL: (prev.totalPnL || 142850) + pnlDiff
+      }));
+      addToast(`Updated trade: ${updatedTrade.symbol} (${updatedTrade.status})`, 'success');
+    },
+    [trades, addToast]
+  );
+
+  const deleteTrade = useCallback(
+    (tradeId) => {
+      const removedTrade = trades.find((t) => t.id === tradeId) || null;
+      const removedPnl = parseFloat(removedTrade?.pnl) || 0;
+
+      setTrades((prev) => {
+        const updated = prev.filter((t) => t.id !== tradeId);
+        localStorage.setItem('mission3_trades_data', JSON.stringify(updated));
+        return updated;
+      });
+      setAccount((prev) => ({
+        ...prev,
+        totalTrades: Math.max(0, (prev.totalTrades || 0) - 1),
+        totalPnL: (prev.totalPnL || 0) - removedPnl
+      }));
+      addToast(
+        `Deleted trade${removedTrade ? `: ${removedTrade.symbol} (${removedTrade.id})` : ''}`,
+        'info'
+      );
+    },
+    [trades, addToast]
+  );
+
   const saveAllAdminState = useCallback(
     (nextConfig, nextTrades) => {
       setAdminConfig(nextConfig);
@@ -247,6 +291,8 @@ export function AppProvider({ children }) {
         toasts,
         addToast,
         addTrade,
+        updateTrade,
+        deleteTrade,
         saveAllAdminState,
         resetAllAdminState
       }}

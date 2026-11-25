@@ -21,6 +21,7 @@ export default function DashboardPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [addTradeOpen, setAddTradeOpen] = useState(false);
   const [addTradeDateISO, setAddTradeDateISO] = useState(null);
+  const [editingTrade, setEditingTrade] = useState(null);
   const [viewerImage, setViewerImage] = useState({ src: null, title: '' });
   const [equityRange, setEquityRange] = useState('30D');
 
@@ -144,7 +145,14 @@ export default function DashboardPage() {
 
         {currentView === 'trades' && (
           <TradesJournalView
-            onOpenAddTrade={() => setAddTradeOpen(true)}
+            onOpenAddTrade={() => {
+              setEditingTrade(null);
+              setAddTradeOpen(true);
+            }}
+            onEditTrade={(trade) => {
+              setEditingTrade(trade);
+              setAddTradeOpen(true);
+            }}
             onOpenImageViewer={(src, title) => setViewerImage({ src, title })}
           />
         )}
@@ -167,9 +175,11 @@ export default function DashboardPage() {
       <AddTradeModal
         isOpen={addTradeOpen}
         initialDateISO={addTradeDateISO}
+        editingTrade={editingTrade}
         onClose={() => {
           setAddTradeOpen(false);
           setAddTradeDateISO(null);
+          setEditingTrade(null);
         }}
       />
 
