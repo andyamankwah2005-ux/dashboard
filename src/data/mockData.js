@@ -66,7 +66,7 @@ export const ASSETS = {
 export const INITIAL_ACCOUNT = {
   name: 'Alex Williamson',
   handle: '#trader-1974',
-  avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=160&q=80',
+  avatar: '/images/portrait-1.jpg',
   totalTrades: 1284,
   winRate: 76.4,
   currentDrawdown: 3.2,
@@ -123,8 +123,9 @@ export const RECENT_TRADES = [
     status: 'WON',
     tag: 'Breakout',
     notes: 'Clean 4H bull flag breakout with massive delta volume inflow. Scaled out 50% at TP1.',
-    screenshot: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=600&q=80',
-    time: 'Today, 01:45'
+    screenshot: '/images/trade-chart-2.jpg',
+    time: 'Today, 01:45',
+    dateISO: '2026-11-25'
   },
   {
     id: 'TRD-9041',
@@ -142,8 +143,9 @@ export const RECENT_TRADES = [
     status: 'WON',
     tag: 'Swing',
     notes: 'Key daily demand block retest with bullish RSI divergence on 1H timeframe.',
-    screenshot: 'https://images.unsplash.com/photo-1642543492481-44e81e3914a7?auto=format&fit=crop&w=600&q=80',
-    time: 'Today, 00:15'
+    screenshot: '/images/trade-chart-1.jpg',
+    time: 'Today, 00:15',
+    dateISO: '2026-11-25'
   },
   {
     id: 'TRD-9040',
@@ -161,8 +163,9 @@ export const RECENT_TRADES = [
     status: 'WON',
     tag: 'Scalping',
     notes: 'Quick scalp rejection at local resistance high with high CVD absorption.',
-    screenshot: 'https://images.unsplash.com/photo-1622979135225-d2ba269bc1df?auto=format&fit=crop&w=600&q=80',
-    time: 'Yesterday, 22:30'
+    screenshot: '/images/hero-3d-terminal.jpg',
+    time: 'Yesterday, 22:30',
+    dateISO: '2026-11-24'
   },
   {
     id: 'TRD-9039',
@@ -180,8 +183,9 @@ export const RECENT_TRADES = [
     status: 'LOST',
     tag: 'News Trade',
     notes: 'Earnings momentum fakeout. Hit stop loss quickly as market digested guidance.',
-    screenshot: 'https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?auto=format&fit=crop&w=600&q=80',
-    time: 'Yesterday, 18:00'
+    screenshot: '/images/journal-3d-showcase.jpg',
+    time: 'Yesterday, 18:00',
+    dateISO: '2026-11-24'
   },
   {
     id: 'TRD-9038',
@@ -199,28 +203,103 @@ export const RECENT_TRADES = [
     status: 'WON',
     tag: 'Swing',
     notes: 'ECB rate decision post-announcement continuation pattern.',
-    screenshot: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=600&q=80',
-    time: 'Sep 21, 14:10'
+    screenshot: '/images/trade-chart-2.jpg',
+    time: 'Nov 21, 14:10',
+    dateISO: '2026-11-21'
+  }
+];
+
+export const ECONOMIC_EVENTS = [
+  {
+    id: 'EVT-101',
+    dateISO: '2026-11-06',
+    time: '08:30 EST',
+    title: 'US Non-Farm Payrolls',
+    category: 'Macro',
+    impact: 'HIGH',
+    forecast: '185K',
+    previous: '172K'
+  },
+  {
+    id: 'EVT-102',
+    dateISO: '2026-11-12',
+    time: '08:30 EST',
+    title: 'US CPI (YoY)',
+    category: 'Macro',
+    impact: 'HIGH',
+    forecast: '2.6%',
+    previous: '2.7%'
+  },
+  {
+    id: 'EVT-103',
+    dateISO: '2026-11-18',
+    time: '14:00 EST',
+    title: 'FOMC Meeting Minutes',
+    category: 'Central Bank',
+    impact: 'HIGH',
+    forecast: '—',
+    previous: '4.50%'
+  },
+  {
+    id: 'EVT-104',
+    dateISO: '2026-11-20',
+    time: '16:20 EST',
+    title: 'NVDA Q3 Earnings',
+    category: 'Earnings',
+    impact: 'HIGH',
+    forecast: '$0.74 EPS',
+    previous: '$0.68 EPS'
+  },
+  {
+    id: 'EVT-105',
+    dateISO: '2026-11-25',
+    time: '08:30 EST',
+    title: 'Initial Jobless Claims',
+    category: 'Macro',
+    impact: 'MEDIUM',
+    forecast: '218K',
+    previous: '215K'
+  },
+  {
+    id: 'EVT-106',
+    dateISO: '2026-11-25',
+    time: '10:00 EST',
+    title: 'Core PCE Price Index',
+    category: 'Macro',
+    impact: 'HIGH',
+    forecast: '2.7%',
+    previous: '2.7%'
+  },
+  {
+    id: 'EVT-107',
+    dateISO: '2026-11-27',
+    time: '11:00 EST',
+    title: 'BTC Monthly Options Expiry',
+    category: 'Crypto',
+    impact: 'MEDIUM',
+    forecast: '$6.4B OI',
+    previous: '$5.1B OI'
   }
 ];
 
 export const DEFAULT_ADMIN_CONFIG = {
+  configVersion: 2,
   colors: {
-    accent: '#10b981',
-    sidebarBg: '#061e1b',
-    canvasBg: '#f4f7f6',
+    accent: '#0075de',
+    sidebarBg: '#f9f9f8',
+    canvasBg: '#ffffff',
     cardBg: '#ffffff',
-    textMain: '#142220',
+    textMain: '#1a1a1a',
     green: '#059669'
   },
   typography: {
-    fontFamily: "'Plus Jakarta Sans', sans-serif",
+    fontFamily: "'Inter', -apple-system, system-ui, 'Segoe UI', Helvetica, Arial, sans-serif",
     monoFont: "'JetBrains Mono', monospace",
     baseFontSize: 14,
     letterSpacing: -0.5
   },
   styling: {
-    radius: 20,
+    radius: 12,
     shadowStyle: 'soft',
     borderStyle: 'subtle',
     density: 'normal'
@@ -252,6 +331,14 @@ export const DEFAULT_ADMIN_CONFIG = {
 };
 
 export const PRESET_THEMES = {
+  notionWink: {
+    accent: '#0075de',
+    sidebarBg: '#f9f9f8',
+    canvasBg: '#ffffff',
+    cardBg: '#ffffff',
+    textMain: '#1a1a1a',
+    green: '#059669'
+  },
   emerald: {
     accent: '#10b981',
     sidebarBg: '#061e1b',

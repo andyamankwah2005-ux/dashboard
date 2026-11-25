@@ -7,11 +7,9 @@ import EquityCurveChart from '../components/charts/EquityCurveChart';
 import WinLossChart from '../components/charts/WinLossChart';
 import RecentTradesTable from '../components/dashboard/RecentTradesTable';
 import TradesJournalView from '../components/dashboard/TradesJournalView';
-import {
-  AnalyticsView,
-  CalendarView,
-  SettingsView
-} from '../components/dashboard/PlaceholderViews';
+import CalendarView from '../components/dashboard/CalendarView';
+import AnalyticsView from '../components/dashboard/AnalyticsView';
+import { SettingsView } from '../components/dashboard/PlaceholderViews';
 import AddTradeModal from '../components/dashboard/AddTradeModal';
 import ImageViewerModal from '../components/dashboard/ImageViewerModal';
 
@@ -22,6 +20,7 @@ export default function DashboardPage() {
   const [currentView, setCurrentView] = useState('dashboard');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [addTradeOpen, setAddTradeOpen] = useState(false);
+  const [addTradeDateISO, setAddTradeDateISO] = useState(null);
   const [viewerImage, setViewerImage] = useState({ src: null, title: '' });
   const [equityRange, setEquityRange] = useState('30D');
 
@@ -150,18 +149,29 @@ export default function DashboardPage() {
           />
         )}
 
-        {currentView === 'analytics' && (
-          <AnalyticsView onReturnOverview={() => setCurrentView('dashboard')} />
-        )}
+        {currentView === 'analytics' && <AnalyticsView />}
 
         {currentView === 'calendar' && (
-          <CalendarView onReturnOverview={() => setCurrentView('dashboard')} />
+          <CalendarView
+            onOpenAddTrade={(dateISO) => {
+              setAddTradeDateISO(dateISO || null);
+              setAddTradeOpen(true);
+            }}
+            onOpenImageViewer={(src, title) => setViewerImage({ src, title })}
+          />
         )}
 
         {currentView === 'settings' && <SettingsView />}
       </main>
 
-      <AddTradeModal isOpen={addTradeOpen} onClose={() => setAddTradeOpen(false)} />
+      <AddTradeModal
+        isOpen={addTradeOpen}
+        initialDateISO={addTradeDateISO}
+        onClose={() => {
+          setAddTradeOpen(false);
+          setAddTradeDateISO(null);
+        }}
+      />
 
       <ImageViewerModal
         src={viewerImage.src}

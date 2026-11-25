@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useApp } from '../../context/AppContext';
 
-export default function AddTradeModal({ isOpen, onClose }) {
+export default function AddTradeModal({ isOpen, onClose, initialDateISO }) {
   const { adminConfig, addTrade, addToast } = useApp();
   const tags = adminConfig.tags || ['Scalping', 'Swing', 'News Trade', 'Breakout', 'Reversal', 'Day Trade'];
   const pairsList = (adminConfig.tradingPairs || '')
@@ -51,6 +51,9 @@ export default function AddTradeModal({ isOpen, onClose }) {
     const calculatedPnl = isWon ? Math.abs(pnlVal) : isBE ? 0 : -Math.abs(pnlVal);
     const pnlPercent = entry > 0 ? ((exit - entry) / entry) * 100 : 5.0;
 
+    const todayISO = new Date().toISOString().slice(0, 10);
+    const chosenDate = initialDateISO || todayISO;
+
     const newTrade = {
       id: `TRD-${Math.floor(Math.random() * 900 + 9100)}`,
       symbol: pair.trim(),
@@ -68,9 +71,9 @@ export default function AddTradeModal({ isOpen, onClose }) {
       tag: selectedTag || 'Scalping',
       notes: notes.trim() || 'Executed according to trading plan.',
       screenshot:
-        screenshot ||
-        'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=600&q=80',
-      time: 'Just now'
+        screenshot || '/images/trade-chart-1.jpg',
+      time: initialDateISO && initialDateISO !== todayISO ? initialDateISO : 'Just now',
+      dateISO: chosenDate
     };
 
     addTrade(newTrade);

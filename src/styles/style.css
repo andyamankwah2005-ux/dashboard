@@ -2,91 +2,121 @@
 
 /* ================= THEME VARIABLES ================= */
 :root {
-  /* LIGHT MODE (Default Studio SaaS) */
-  --bg-app: #dce5e2;
-  --app-container-bg: #061e1b;
-  
-  --sidebar-bg: #061e1b;
-  --sidebar-surface: #0a2925;
-  --sidebar-hover: #103b35;
-  --sidebar-active: #144942;
-  --sidebar-text: #c0ded8;
-  --sidebar-text-muted: #5e8f86;
-  --sidebar-border: #133a34;
+  /* LIGHT MODE (Notion — Work with a Wink Design Tokens) */
+  --bg-app: var(--color-canvas, #ffffff);
+  --app-container-bg: var(--color-panel, #f9f9f8);
 
-  --canvas-bg: #f4f7f6;
-  --card-bg: #ffffff;
-  --card-border: #e6ecea;
-  --card-hover-border: #cbdad5;
-  
-  --brand-emerald: #10b981;
-  --brand-emerald-dark: #047857;
-  --brand-emerald-light: #34d399;
-  --brand-teal: #0d9488;
-  --brand-accent-glow: rgba(16, 185, 129, 0.25);
-  
-  --text-main: #142220;
-  --text-muted: #647b77;
-  --text-light: #94a7a3;
+  --sidebar-bg: var(--color-panel, #f9f9f8);
+  --sidebar-surface: var(--color-warm, #f6f5f4);
+  --sidebar-hover: rgba(0, 0, 0, 0.05);
+  --sidebar-active: var(--color-secondary, #e6f3fe);
+  --sidebar-text: var(--color-text, #1a1a1a);
+  --sidebar-text-muted: var(--color-muted, #757575);
+  --sidebar-border: var(--color-rule, rgba(0, 0, 0, 0.1));
+
+  --canvas-bg: var(--color-canvas, #ffffff);
+  --card-bg: var(--color-canvas, #ffffff);
+  --card-border: var(--color-rule, rgba(0, 0, 0, 0.1));
+  --card-hover-border: rgba(0, 0, 0, 0.2);
+
+  --brand-emerald: var(--color-action, #0075de);
+  --brand-emerald-dark: var(--color-link-dark, #005bab);
+  --brand-emerald-light: #3b9eff;
+  --brand-teal: var(--color-action, #0075de);
+  --brand-accent-glow: rgba(0, 117, 222, 0.18);
+
+  --text-main: var(--color-ink, #0d0d0d);
+  --text-muted: var(--color-muted, #757575);
+  --text-light: #9e9e9e;
 
   --color-green: #059669;
   --color-green-bg: #ecfdf5;
   --color-red: #e11d48;
   --color-red-bg: #fff1f2;
-  --color-blue: #2563eb;
-  --color-blue-bg: #eff6ff;
+  --color-blue: var(--color-action, #0075de);
+  --color-blue-bg: var(--color-secondary, #e6f3fe);
 
-  --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-main: var(--font-grotesk, 'Inter', -apple-system, BlinkMacSystemFont, sans-serif);
   --font-mono: 'JetBrains Mono', monospace;
 
-  --radius-lg: 24px;
-  --radius-md: 20px;
-  --radius-sm: 12px;
+  --radius-lg: 12px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
   --radius-pill: 9999px;
 
-  --shadow-card: 0 4px 20px -2px rgba(10, 35, 30, 0.04), 0 2px 6px -1px rgba(10, 35, 30, 0.02);
-  --shadow-hover: 0 12px 30px -4px rgba(10, 35, 30, 0.09), 0 4px 10px -2px rgba(10, 35, 30, 0.03);
-  --shadow-modal: 0 25px 50px -12px rgba(6, 30, 27, 0.35);
+  --shadow-card: var(--shadow-paper, 0px 0.2px 1px 0px rgba(0, 0, 0, 0.01), 0px 0.8px 2.9px 0px rgba(0, 0, 0, 0.02), 0px 2px 7.8px 0px rgba(0, 0, 0, 0.027), 0px 4px 18px 0px rgba(0, 0, 0, 0.04));
+  --shadow-hover: 0 8px 24px -4px rgba(0, 0, 0, 0.08), 0 2px 8px -2px rgba(0, 0, 0, 0.04);
+  --shadow-modal: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 
-  --chart-grid: #eef3f1;
-  --chart-axis-text: #94a7a3;
-  --chart-crosshair: #647b77;
+  --chart-grid: #f0f0ef;
+  --chart-axis-text: #757575;
+  --chart-crosshair: #757575;
 
-  --transition-smooth: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
-  --transition-theme: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  --transition-smooth: all 0.2s cubic-bezier(0.42, 0, 1, 1);
+  --transition-theme: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 /* ================= DARK MODE OVERRIDES ================= */
 [data-theme="dark"] {
-  --bg-app: #030d0c;
-  --app-container-bg: #041210;
+  --bg-app: #121212;
+  --app-container-bg: #141414;
 
-  --sidebar-bg: #03100e;
-  --sidebar-surface: #08211d;
-  --sidebar-hover: #0c2e29;
-  --sidebar-active: #103c35;
-  --sidebar-text: #c0ded8;
-  --sidebar-text-muted: #5e8f86;
-  --sidebar-border: #0c2b26;
+  --sidebar-bg: #181818;
+  --sidebar-surface: #222222;
+  --sidebar-hover: rgba(255, 255, 255, 0.06);
+  --sidebar-active: rgba(0, 117, 222, 0.2);
+  --sidebar-text: #d4d4d4;
+  --sidebar-text-muted: #8f8f8f;
+  --sidebar-border: rgba(255, 255, 255, 0.1);
 
-  --canvas-bg: #071816;
-  --card-bg: #0b221f;
-  --card-border: #133833;
-  --card-hover-border: #1d4d46;
+  --canvas-bg: #121212;
+  --card-bg: #1c1c1c;
+  --card-border: rgba(255, 255, 255, 0.1);
+  --card-hover-border: rgba(255, 255, 255, 0.2);
 
-  --text-main: #f0fdfa;
-  --text-muted: #80aba3;
-  --text-light: #4b6f68;
+  --text-main: #f3f3f3;
+  --text-muted: #9b9b9b;
+  --text-light: #6e6e6e;
 
-  --color-green-bg: rgba(16, 185, 129, 0.15);
-  --color-red-bg: rgba(225, 29, 72, 0.15);
+  --color-green-bg: rgba(16, 185, 129, 0.16);
+  --color-red-bg: rgba(225, 29, 72, 0.16);
+  --color-blue-bg: rgba(0, 117, 222, 0.2);
 
-  --shadow-card: 0 6px 24px -2px rgba(0, 0, 0, 0.4), 0 2px 6px -1px rgba(0, 0, 0, 0.2);
-  --shadow-hover: 0 14px 34px -4px rgba(0, 0, 0, 0.6), 0 4px 12px -2px rgba(0, 0, 0, 0.3);
+  --shadow-card: 0 4px 20px -2px rgba(0, 0, 0, 0.45), 0 2px 6px -1px rgba(0, 0, 0, 0.25);
+  --shadow-hover: 0 12px 30px -4px rgba(0, 0, 0, 0.6), 0 4px 12px -2px rgba(0, 0, 0, 0.35);
 
-  --chart-grid: #0f302b;
-  --chart-axis-text: #6e948c;
-  --chart-crosshair: #80aba3;
+  --chart-grid: rgba(255, 255, 255, 0.08);
+  --chart-axis-text: #8f8f8f;
+  --chart-crosshair: #9b9b9b;
+}
+
+[data-theme="dark"] .brand-icon {
+  background: var(--brand-emerald, #0075de);
+}
+
+[data-theme="dark"] .nav-item.active,
+[data-theme="dark"] .admin-tab-btn.active {
+  color: #60a5fa;
+}
+
+[data-theme="dark"] .btn-primary-dark,
+[data-theme="dark"] .btn-secondary-admin,
+[data-theme="dark"] .btn-return-dashboard {
+  background-color: rgba(0, 117, 222, 0.2);
+  color: #93c5fd;
+  border-color: rgba(96, 165, 250, 0.28);
+}
+
+[data-theme="dark"] .btn-primary-dark:hover,
+[data-theme="dark"] .btn-secondary-admin:hover,
+[data-theme="dark"] .btn-return-dashboard:hover {
+  background-color: rgba(0, 117, 222, 0.32);
+  color: #ffffff;
+}
+
+[data-theme="dark"] .trade-card-tag-badge {
+  background: rgba(0, 117, 222, 0.2);
+  color: #93c5fd;
 }
 
 /* Reset & Global */
@@ -149,28 +179,27 @@ body {
 }
 
 .brand-icon {
-  width: 34px;
-  height: 34px;
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-  border-radius: 9px;
+  width: 32px;
+  height: 32px;
+  background: var(--color-ink, #0d0d0d);
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  font-weight: 800;
-  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.45);
+  font-weight: 700;
   transition: transform 0.2s ease;
 }
 
 .brand-wrapper:hover .brand-icon {
-  transform: scale(1.05) rotate(-3deg);
+  transform: scale(1.04);
 }
 
 .brand-name {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
-  letter-spacing: -0.3px;
-  color: #ffffff;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
   display: flex;
   align-items: center;
   gap: 6px;
@@ -178,13 +207,13 @@ body {
 
 .brand-badge {
   font-size: 10px;
-  font-weight: 700;
+  font-weight: 600;
   text-transform: uppercase;
-  background: rgba(16, 185, 129, 0.2);
-  color: var(--brand-emerald-light);
+  background: var(--color-lavender, #eadbfa);
+  color: var(--color-ink, #0d0d0d);
   padding: 2px 7px;
   border-radius: var(--radius-pill);
-  letter-spacing: 0.5px;
+  letter-spacing: 0.4px;
 }
 
 .mobile-close-btn {
@@ -216,12 +245,12 @@ body {
 .nav-item {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 11px 14px;
-  border-radius: var(--radius-sm);
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 6px;
   color: var(--sidebar-text);
   text-decoration: none;
-  font-size: 13.5px;
+  font-size: 14px;
   font-weight: 500;
   transition: var(--transition-smooth);
   cursor: pointer;
@@ -229,15 +258,13 @@ body {
 
 .nav-item:hover {
   background-color: var(--sidebar-hover);
-  color: #ffffff;
-  transform: translateX(3px);
+  color: var(--text-main);
 }
 
 .nav-item.active {
   background-color: var(--sidebar-active);
-  color: #ffffff;
+  color: var(--brand-emerald-dark);
   font-weight: 600;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
   position: relative;
 }
 
@@ -245,12 +272,11 @@ body {
   content: '';
   position: absolute;
   left: 0;
-  top: 15%;
-  height: 70%;
-  width: 4px;
+  top: 20%;
+  height: 60%;
+  width: 3px;
   background: var(--brand-emerald);
-  border-radius: 0 4px 4px 0;
-  box-shadow: 0 0 10px rgba(16, 185, 129, 0.6);
+  border-radius: 0 3px 3px 0;
 }
 
 .nav-item svg {
@@ -262,7 +288,7 @@ body {
 .sidebar-footer {
   margin-top: auto;
   padding-top: 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid var(--sidebar-border);
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -350,7 +376,7 @@ body {
 .user-name {
   font-size: 13px;
   font-weight: 600;
-  color: #ffffff;
+  color: var(--text-main);
 }
 
 .user-handle {
@@ -373,8 +399,6 @@ body {
   flex: 1;
   min-width: 0;
   background-color: var(--canvas-bg);
-  border-top-left-radius: 28px;
-  border-bottom-left-radius: 28px;
   overflow-y: auto;
   padding: 28px 32px;
   display: flex;
@@ -498,52 +522,52 @@ body {
 }
 
 .btn-primary-dark {
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
-  padding: 9px 18px;
-  background-color: #0d2825;
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: var(--radius-pill);
-  font-size: 13px;
-  font-weight: 600;
+  height: 38px;
+  padding: 6px 15px;
+  background-color: var(--color-secondary, #e6f3fe);
+  color: var(--color-link-dark, #005bab);
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
   cursor: pointer;
   transition: var(--transition-smooth);
-  box-shadow: 0 4px 12px rgba(13, 40, 37, 0.2);
 }
 
 .btn-primary-dark:hover {
-  background-color: #143d39;
-  transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(13, 40, 37, 0.3);
+  background-color: rgba(0, 0, 0, 0.06);
+  color: var(--color-ink, #0d0d0d);
 }
 
 [data-theme="dark"] .btn-primary-dark {
   background-color: #113832;
+  color: #ffffff;
   border-color: #1a4d45;
 }
 
 .btn-trade-action {
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
-  padding: 9px 18px;
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  height: 38px;
+  padding: 6px 15px;
+  background: var(--brand-emerald, #0075de);
   color: #ffffff;
   border: none;
-  border-radius: var(--radius-pill);
-  font-size: 13px;
-  font-weight: 700;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
   cursor: pointer;
   transition: var(--transition-smooth);
-  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
 }
 
 .btn-trade-action:hover {
-  filter: brightness(1.08);
-  transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(16, 185, 129, 0.45);
+  background: rgba(0, 0, 0, 0.78);
 }
 
 /* ================= 1. OVERVIEW SUMMARY ROW (4 KPI CARDS) ================= */
@@ -569,6 +593,8 @@ body {
 .chart-card-container {
   display: flex;
   flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .equity-legend-row {
@@ -1317,10 +1343,12 @@ body {
 
 .chart-canvas-container {
   width: 100%;
-  height: 280px;
+  height: 260px;
   position: relative;
+  overflow: hidden;
 }
 
+.chart-canvas-container canvas,
 #tradingCanvas {
   width: 100%;
   height: 100%;
@@ -1744,7 +1772,9 @@ input:checked + .toggle-slider:before {
 }
 
 .view-panel.active {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
   animation: fadeIn 0.25s ease;
 }
 
@@ -2153,5 +2183,553 @@ input:checked + .toggle-slider:before {
     padding: 18px;
   }
 }
+
+/* ================= NOTION-STYLE ECONOMIC & TRADE CALENDAR ================= */
+.notion-cal-toolbar {
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.notion-cal-toolbar-left,
+.notion-cal-toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.notion-cal-nav-group {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--card-bg);
+}
+
+.notion-cal-icon-btn,
+.notion-cal-today-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-main);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 11px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.notion-cal-icon-btn {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.notion-cal-icon-btn:hover,
+.notion-cal-today-btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="dark"] .notion-cal-icon-btn:hover,
+[data-theme="dark"] .notion-cal-today-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.notion-cal-month-title {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
+}
+
+.notion-cal-seg-group {
+  display: inline-flex;
+  background: var(--sidebar-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  padding: 3px;
+  gap: 2px;
+}
+
+.notion-cal-seg-btn {
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  padding: 5px 11px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.notion-cal-seg-btn.active {
+  background: var(--card-bg);
+  color: var(--text-main);
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.notion-cal-stats-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.notion-cal-stat-pill {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cal-stat-kicker {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.cal-stat-val {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.notion-cal-workspace {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  align-items: start;
+}
+
+.notion-cal-workspace.with-peek {
+  grid-template-columns: 1fr 330px;
+}
+
+.notion-cal-board {
+  padding: 0;
+  overflow: hidden;
+}
+
+.notion-cal-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  background: var(--sidebar-bg);
+  border-bottom: 1px solid var(--card-border);
+}
+
+.notion-cal-weekday {
+  padding: 10px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-align: left;
+}
+
+.notion-cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+.notion-cal-cell {
+  min-height: 112px;
+  padding: 8px 10px;
+  background: var(--card-bg);
+  border: none;
+  border-right: 1px solid var(--card-border);
+  border-bottom: 1px solid var(--card-border);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 5px;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  min-width: 0;
+}
+
+.notion-cal-cell:nth-child(7n) {
+  border-right: none;
+}
+
+.notion-cal-cell:hover {
+  background: var(--sidebar-bg);
+}
+
+.notion-cal-cell.is-muted {
+  opacity: 0.45;
+}
+
+.notion-cal-cell.is-win-day {
+  background: var(--color-green-bg);
+}
+
+.notion-cal-cell.is-loss-day {
+  background: var(--color-red-bg);
+}
+
+.notion-cal-cell.is-selected {
+  box-shadow: inset 0 0 0 2px var(--brand-emerald, #0075de);
+}
+
+.notion-cal-cell-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+}
+
+.notion-cal-day-num {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-main);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notion-cal-day-num.is-today {
+  background: var(--brand-emerald, #0075de);
+  color: #ffffff;
+}
+
+.notion-cal-trade-count {
+  font-size: 10.5px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.notion-cal-day-pnl {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.notion-cal-events-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-top: auto;
+}
+
+.notion-cal-event-chip {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--sidebar-bg);
+  border: 1px solid var(--card-border);
+  font-size: 10.5px;
+  color: var(--text-main);
+  overflow: hidden;
+}
+
+.notion-cal-event-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.notion-cal-event-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.notion-cal-more {
+  font-size: 10px;
+  color: var(--text-muted);
+  padding-left: 4px;
+}
+
+/* Agenda View */
+.notion-cal-agenda {
+  display: flex;
+  flex-direction: column;
+}
+
+.notion-agenda-row {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--card-border);
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 16px;
+  align-items: start;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.notion-agenda-row:last-child {
+  border-bottom: none;
+}
+
+.notion-agenda-row:hover,
+.notion-agenda-row.is-selected {
+  background: var(--sidebar-bg);
+}
+
+.notion-agenda-date {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 13px;
+  color: var(--text-main);
+}
+
+.notion-agenda-pnl {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+.notion-agenda-items {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.notion-agenda-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-main);
+}
+
+.notion-cal-empty {
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 13.5px;
+}
+
+/* Side Peek Inspector */
+.notion-cal-peek {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: sticky;
+  top: 20px;
+}
+
+.notion-peek-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.notion-peek-kicker {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.notion-peek-date {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-top: 2px;
+}
+
+.notion-peek-summary {
+  background: var(--sidebar-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  padding: 12px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.peek-sum-label {
+  display: block;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.peek-sum-val {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.notion-peek-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.notion-peek-section-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.notion-peek-empty {
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+
+.notion-peek-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.notion-peek-event-card,
+.notion-peek-trade-card {
+  background: var(--sidebar-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.peek-event-top,
+.peek-trade-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 12.5px;
+  color: var(--text-main);
+}
+
+.peek-event-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+}
+
+.peek-impact-pill {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 9999px;
+}
+
+.peek-impact-pill.impact-high {
+  background: #fff1f2;
+  color: #e11d48;
+}
+
+.peek-impact-pill.impact-medium {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.peek-event-meta,
+.peek-trade-sub {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.peek-trade-thumb {
+  width: 100%;
+  height: 92px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-top: 4px;
+  cursor: pointer;
+  border: 1px solid var(--card-border);
+}
+
+@media (max-width: 1100px) {
+  .notion-cal-workspace.with-peek {
+    grid-template-columns: 1fr;
+  }
+
+  .notion-cal-peek {
+    position: static;
+  }
+}
+
+@media (max-width: 720px) {
+  .notion-cal-cell {
+    min-height: 76px;
+    padding: 6px;
+  }
+
+  .notion-cal-event-chip {
+    display: none;
+  }
+
+  .notion-agenda-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}
+
+/* ================= ANALYTICS & RISK ENGINE ================= */
+.analytics-split-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.analytics-tag-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.analytics-tag-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.analytics-tag-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.analytics-progress-track {
+  width: 100%;
+  height: 7px;
+  border-radius: 9999px;
+  background: var(--sidebar-bg);
+  overflow: hidden;
+}
+
+.analytics-progress-fill {
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 0.3s ease;
+}
+
+@media (max-width: 1024px) {
+  .analytics-split-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
 
 

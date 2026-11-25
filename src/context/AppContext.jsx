@@ -15,6 +15,9 @@ function loadSavedConfig() {
     const saved = localStorage.getItem('mission3_admin_config');
     if (!saved) return JSON.parse(JSON.stringify(DEFAULT_ADMIN_CONFIG));
     const parsed = JSON.parse(saved);
+    if (parsed.configVersion !== DEFAULT_ADMIN_CONFIG.configVersion) {
+      return JSON.parse(JSON.stringify(DEFAULT_ADMIN_CONFIG));
+    }
     return {
       ...DEFAULT_ADMIN_CONFIG,
       ...parsed,
@@ -34,17 +37,35 @@ function loadSavedConfig() {
 function loadSavedTrades() {
   try {
     const saved = localStorage.getItem('mission3_trades_data');
-    return saved ? JSON.parse(saved) : JSON.parse(JSON.stringify(RECENT_TRADES));
+    if (!saved) return JSON.parse(JSON.stringify(RECENT_TRADES));
+    const parsed = JSON.parse(saved);
+    return parsed.map((t, idx) => ({
+      ...t,
+      dateISO: t.dateISO || RECENT_TRADES[idx % RECENT_TRADES.length].dateISO || '2026-11-25',
+      screenshot:
+        t.screenshot && t.screenshot.includes('unsplash.com')
+          ? RECENT_TRADES[idx % RECENT_TRADES.length].screenshot
+          : t.screenshot
+    }));
   } catch {
     return JSON.parse(JSON.stringify(RECENT_TRADES));
   }
 }
 
-export function applyAdminCssVariables(config) {
+export function applyAdminCssVariables(config, theme = 'light') {
   const root = document.documentElement;
   if (!config) return;
 
-  if (config.colors) {
+  if (theme === 'dark') {
+    // Let [data-theme="dark"] CSS variables govern dark surfaces & text contrast
+    root.style.removeProperty('--sidebar-bg');
+    root.style.removeProperty('--canvas-bg');
+    root.style.removeProperty('--card-bg');
+    root.style.removeProperty('--text-main');
+    root.style.removeProperty('--card-border');
+    if (config.colors?.accent) root.style.setProperty('--brand-emerald', config.colors.accent);
+    if (config.colors?.green) root.style.setProperty('--color-green', config.colors.green);
+  } else if (config.colors) {
     if (config.colors.accent) root.style.setProperty('--brand-emerald', config.colors.accent);
     if (config.colors.sidebarBg) root.style.setProperty('--sidebar-bg', config.colors.sidebarBg);
     if (config.colors.canvasBg) root.style.setProperty('--canvas-bg', config.colors.canvasBg);
@@ -79,12 +100,14 @@ export function applyAdminCssVariables(config) {
       );
     }
 
-    if (config.styling.borderStyle === 'none') {
+    if (theme === 'dark') {
+      root.style.removeProperty('--card-border');
+    } else if (config.styling.borderStyle === 'none') {
       root.style.setProperty('--card-border', 'transparent');
     } else if (config.styling.borderStyle === 'medium') {
       root.style.setProperty('--card-border', '#cbdad5');
     } else {
-      root.style.setProperty('--card-border', '#e6ecea');
+      root.style.setProperty('--card-border', 'rgba(0, 0, 0, 0.1)');
     }
   }
 }
@@ -128,10 +151,10 @@ export function AppProvider({ children }) {
     localStorage.setItem('mission3_theme', theme);
   }, [theme]);
 
-  // Apply admin CSS variables whenever adminConfig changes
+  // Apply admin CSS variables whenever adminConfig or theme changes
   useEffect(() => {
-    applyAdminCssVariables(adminConfig);
-  }, [adminConfig]);
+    applyAdminCssVariables(adminConfig, theme);
+  }, [adminConfig, theme]);
 
   // Live equity simulation
   useEffect(() => {
@@ -157,12 +180,10 @@ export function AppProvider({ children }) {
   }, []);
 
   const toggleTheme = useCallback(() => {
-    setTheme((prev) => {
-      const next = prev === 'dark' ? 'light' : 'dark';
-      addToast(`Switched to ${next.toUpperCase()} mode`, 'info');
-      return next;
-    });
-  }, [addToast]);
+    const next = theme === 'dark' ? 'light' : 'dark';
+    setTheme(next);
+    addToast(`Switched to ${next.toUpperCase()} mode`, 'info');
+  }, [theme, addToast]);
 
   const addTrade = useCallback(
     (newTrade) => {

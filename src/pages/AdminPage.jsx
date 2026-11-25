@@ -7,6 +7,7 @@ import {
 } from '../data/mockData';
 
 const PRESET_LIST = [
+  { key: 'notionWink', label: 'Notion Wink (Default)', color: '#0075de' },
   { key: 'emerald', label: 'Emerald Studio', color: '#10b981' },
   { key: 'cyber', label: 'Cyber Teal', color: '#06b6d4' },
   { key: 'royal', label: 'Royal Indigo', color: '#6366f1' },
@@ -26,6 +27,7 @@ const COLOR_FIELDS = [
 
 export default function AdminPage() {
   const {
+    theme,
     adminConfig,
     trades,
     saveAllAdminState,
@@ -41,15 +43,15 @@ export default function AdminPage() {
     JSON.parse(JSON.stringify(trades))
   );
   const [activeTab, setActiveTab] = useState('theme-colors');
-  const [activePreset, setActivePreset] = useState('emerald');
+  const [activePreset, setActivePreset] = useState('notionWink');
   const [previewMode, setPreviewMode] = useState('dashboard');
   const [newTagName, setNewTagName] = useState('');
   const importInputRef = useRef(null);
 
   // Live preview of CSS variables while editing in Admin Studio
   useEffect(() => {
-    applyAdminCssVariables(draftConfig);
-  }, [draftConfig]);
+    applyAdminCssVariables(draftConfig, theme);
+  }, [draftConfig, theme]);
 
   const updateColor = (key, value) => {
     setDraftConfig((prev) => ({
@@ -345,11 +347,11 @@ export default function AdminPage() {
 
         <div className="sidebar-footer">
           <a
-            href="/"
+            href="/dashboard"
             className="btn-return-dashboard"
             onClick={(e) => {
               e.preventDefault();
-              navigate('/');
+              navigate('/dashboard');
             }}
           >
             <svg
@@ -1072,11 +1074,11 @@ export default function AdminPage() {
                 </button>
               </div>
               <a
-                href="/"
+                href="/dashboard"
                 className="preview-external-link"
                 onClick={(e) => {
                   e.preventDefault();
-                  navigate('/');
+                  navigate('/dashboard');
                 }}
               >
                 <span>Full App</span>

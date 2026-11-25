@@ -1,0 +1,43 @@
+/* ================= MISSION 3 DESIGN SYSTEM TOKENS ================= */
+:root {
+  /* Brand & Action */
+  --color-action: #0075de;
+  --color-secondary: #e6f3fe;
+  --color-link-dark: #005bab;
+  --color-lavender: #eadbfa;
+
+  /* Portrait & Accent */
+  --color-portrait-red: #f64932;
+  --color-portrait-red-dark: #e32d14;
+  --color-portrait-blue: #097fe8;
+  --color-portrait-yellow: #ffb110;
+  --color-portrait-yellow-dark: #e89d01;
+
+  /* Neutrals */
+  --color-canvas: #ffffff;
+  --color-panel: #f9f9f8;
+  --color-warm: #f6f5f4;
+  --color-rule: rgba(0, 0, 0, 0.1);
+  --color-muted: #757575;
+  --color-text: #1a1a1a;
+  --color-ink: #0d0d0d;
+  --color-black: #000000;
+
+  /* Typography */
+  --font-grotesk: 'Inter', -apple-system, system-ui, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --font-serif: 'Lora', Georgia, serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Radii */
+  --radius-action: 8px;
+  --radius-card: 12px;
+  --radius-nav: 4px;
+  --radius-pill: 9999px;
+
+  /* Paper Elevation */
+  --shadow-paper: 0px 0.2px 1px 0px rgba(0, 0, 0, 0.01),
+    0px 0.8px 2.9px 0px rgba(0, 0, 0, 0.02),
+    0px 2px 7.8px 0px rgba(0, 0, 0, 0.027),
+    0px 4px 18px 0px rgba(0, 0, 0, 0.04);
+}
+
