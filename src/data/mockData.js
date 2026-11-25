@@ -82,7 +82,6 @@ export const INITIAL_ACCOUNT = {
   netLiquidity: 967570.00
 };
 
-// 30-Day Equity Curve dataset
 export const EQUITY_CURVE_DATA = [
   { date: 'Aug 24', equity: 100000, benchmark: 100000 },
   { date: 'Aug 27', equity: 104500, benchmark: 101200 },
@@ -98,7 +97,6 @@ export const EQUITY_CURVE_DATA = [
   { date: 'Sep 23', equity: 142850, benchmark: 109400 }
 ];
 
-// Win / Loss Performance Monthly distribution
 export const WIN_LOSS_PERFORMANCE = [
   { period: 'Apr', wins: 84, losses: 26, winRate: 76.3, pnl: 22400 },
   { period: 'May', wins: 98, losses: 29, winRate: 77.1, pnl: 28900 },
@@ -108,7 +106,6 @@ export const WIN_LOSS_PERFORMANCE = [
   { period: 'Sep', wins: 94, losses: 24, winRate: 79.6, pnl: 36450 }
 ];
 
-// Recent Executed Trades with Screenshots, SL/TP, Tags, and Notes
 export const RECENT_TRADES = [
   {
     id: 'TRD-9042',
@@ -207,29 +204,101 @@ export const RECENT_TRADES = [
   }
 ];
 
-export function generateCandleHistory(symbol, basePrice, count = 45) {
-  const candles = [];
-  let current = basePrice * 0.95;
-  let now = Date.now() - count * 60 * 1000;
-
-  for (let i = 0; i < count; i++) {
-    const volatility = current * 0.007;
-    const delta = (Math.random() - 0.47) * volatility;
-    const open = current;
-    const close = open + delta;
-    const high = Math.max(open, close) + Math.random() * volatility * 0.5;
-    const low = Math.min(open, close) - Math.random() * volatility * 0.5;
-    const volume = Math.floor(Math.random() * 800) + 120;
-
-    candles.push({
-      time: now + i * 60 * 1000,
-      open,
-      high,
-      low,
-      close,
-      volume
-    });
-    current = close;
+export const DEFAULT_ADMIN_CONFIG = {
+  colors: {
+    accent: '#10b981',
+    sidebarBg: '#061e1b',
+    canvasBg: '#f4f7f6',
+    cardBg: '#ffffff',
+    textMain: '#142220',
+    green: '#059669'
+  },
+  typography: {
+    fontFamily: "'Plus Jakarta Sans', sans-serif",
+    monoFont: "'JetBrains Mono', monospace",
+    baseFontSize: 14,
+    letterSpacing: -0.5
+  },
+  styling: {
+    radius: 20,
+    shadowStyle: 'soft',
+    borderStyle: 'subtle',
+    density: 'normal'
+  },
+  widgets: {
+    summaryCards: true,
+    equityChart: true,
+    winLossChart: true,
+    recentTrades: true,
+    addTradeModule: true,
+    navTrades: true,
+    navAnalytics: true,
+    navCalendar: true,
+    navSettings: true
+  },
+  tags: ['Scalping', 'Swing', 'News Trade', 'Breakout', 'Reversal', 'Day Trade'],
+  tradingPairs: 'BTC/USDT, ETH/USD, SOL/USD, NVDA, AAPL, EUR/USD, GBP/USD, GOLD',
+  branding: {
+    appName: 'Mission 3',
+    appBadge: 'PRO',
+    dashboardTitle: 'Main Dashboard (Overview)',
+    traderName: 'Alex Williamson',
+    traderHandle: '#trader-1974',
+    totalTrades: 1284,
+    winRate: 76.4,
+    drawdown: 3.2,
+    totalPnl: 142850.00
   }
-  return candles;
-}
+};
+
+export const PRESET_THEMES = {
+  emerald: {
+    accent: '#10b981',
+    sidebarBg: '#061e1b',
+    canvasBg: '#f4f7f6',
+    cardBg: '#ffffff',
+    textMain: '#142220',
+    green: '#059669'
+  },
+  cyber: {
+    accent: '#06b6d4',
+    sidebarBg: '#081e28',
+    canvasBg: '#f0f9ff',
+    cardBg: '#ffffff',
+    textMain: '#0c2638',
+    green: '#0ea5e9'
+  },
+  royal: {
+    accent: '#6366f1',
+    sidebarBg: '#13112c',
+    canvasBg: '#f5f3ff',
+    cardBg: '#ffffff',
+    textMain: '#1e1b4b',
+    green: '#8b5cf6'
+  },
+  sunset: {
+    accent: '#f97316',
+    sidebarBg: '#231508',
+    canvasBg: '#fffaf5',
+    cardBg: '#ffffff',
+    textMain: '#2e1804',
+    green: '#ea580c'
+  },
+  ruby: {
+    accent: '#e11d48',
+    sidebarBg: '#1f080e',
+    canvasBg: '#fff1f2',
+    cardBg: '#ffffff',
+    textMain: '#2b0711',
+    green: '#f43f5e'
+  },
+  darkObsidian: {
+    accent: '#3b82f6',
+    sidebarBg: '#0b1120',
+    canvasBg: '#0f172a',
+    cardBg: '#1e293b',
+    textMain: '#f8fafc',
+    green: '#10b981'
+  }
+};
+

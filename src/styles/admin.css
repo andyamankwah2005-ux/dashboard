@@ -2,13 +2,10 @@
 
 .admin-app-wrapper {
   width: 100%;
-  max-width: 1560px;
-  min-height: 920px;
+  min-height: 100vh;
   background-color: var(--sidebar-bg);
-  border-radius: var(--radius-lg);
-  box-shadow: 0 30px 70px -15px rgba(2, 14, 12, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.08);
   display: flex;
-  overflow: hidden;
+  overflow-x: hidden;
   position: relative;
 }
 
@@ -655,5 +652,65 @@
 @media (max-width: 1024px) {
   .admin-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .admin-app-wrapper {
+    flex-direction: column;
+  }
+
+  .admin-sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--sidebar-border);
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .admin-nav-tabs {
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+
+  .admin-tab-btn {
+    padding: 8px 12px;
+    font-size: 12.5px;
+  }
+
+  .admin-sidebar .sidebar-footer {
+    display: none;
+  }
+
+  .admin-main {
+    border-radius: 0;
+    padding: 20px 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .admin-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .admin-header-actions {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .color-picker-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .preview-metric-row {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .preview-mid-grid,
+  .prev-journal-cards-grid {
+    grid-template-columns: 1fr !important;
   }
 }
